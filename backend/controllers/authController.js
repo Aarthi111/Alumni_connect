@@ -1,10 +1,9 @@
 const User = require('../models/User')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt= require('bcryptjs')
+const jwt =require('jsonwebtoken')
 
-const generateToken = (id, role) => {
-  return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: '7d' })
-}
+const generateToken= (id, role) => {
+  return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: '7d' }) }
 const register = async (req, res) => {
   const { name, email, password, role } = req.body
   try {
@@ -28,7 +27,7 @@ const login = async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await User.findOne({ email })
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' })
+    if (!user) return res.status(400).json({ message: 'Invalid credentials'})
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' })
     res.json({
