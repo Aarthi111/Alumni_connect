@@ -7,7 +7,22 @@ const userSchema = new mongoose.Schema({
         type:String,
         enum:['student','alumni','admin'],
         default:'student'
-    }
-},{timestamps:true})
+    
+},
+//for otp.
+otp: String,
+otpExpiry: Date,
+isVerified: {type:Boolean, default:false},
+
+//alumni verify process
+batch: String,
+department:String,
+company:String,
+status:{
+    type: String,
+    enum: ['pending','approved','rejected'],
+    default:'pending'
+}
+},{timestamps: true})
 
 module.exports = mongoose.model('User',userSchema)
