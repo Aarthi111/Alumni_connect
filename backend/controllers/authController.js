@@ -1,4 +1,5 @@
 const User = require('../models/User')
+<<<<<<< HEAD
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('../utils/sendEmail')
@@ -13,6 +14,13 @@ const generateOTP = () => {
 }
 
 // Register
+=======
+const bcrypt= require('bcryptjs')
+const jwt =require('jsonwebtoken')
+
+const generateToken= (id, role) => {
+  return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: '7d' }) }
+>>>>>>> 2a4aff541d96b087bbc2504e41520cab8a958ec5
 const register = async (req, res) => {
   const { name, email, password, role, batch, department, company, linkedIn } = req.body
 
@@ -121,8 +129,12 @@ const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ email })
+<<<<<<< HEAD
     if (!user) return res.status(400).json({ message: 'Invalid credentials' })
 
+=======
+    if (!user) return res.status(400).json({ message: 'Invalid credentials'})
+>>>>>>> 2a4aff541d96b087bbc2504e41520cab8a958ec5
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' })
 
@@ -143,6 +155,7 @@ const login = async (req, res) => {
     })
 
   } catch (err) {
+<<<<<<< HEAD
     res.status(500).json({ message: 'Server error' })
   }
 }
@@ -150,3 +163,7 @@ const otp = generateOTP()
 console.log('Generated OTP:', otp) // see OTP in terminal
 
 module.exports = { register, login, verifyOTP }
+=======
+    res.status(500).json({ message: 'Server error' })}}
+module.exports = { register, login }
+>>>>>>> 2a4aff541d96b087bbc2504e41520cab8a958ec5
