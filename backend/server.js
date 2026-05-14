@@ -13,3 +13,6 @@ app.use('/api/auth', require('./routes/authRoutes'))
 const PORT = process.env.PORT || 5000
 app.listen(PORT, ()=>console.log(`Server running in port ${PORT}`))//server start
 app.use('/api/admin',require('./routes/adminRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/scholarships', require('./routes/scholarshipRoutes'))
+app.use('/api/jobs', require('./routes/jobRoutes'))
